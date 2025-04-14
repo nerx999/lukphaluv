@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>สำหรับเธอคนเดียว 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* ทำให้เต็มหน้าจอ */
+    }
+    h1 {
+      margin-top: 60px;
+      font-size: 2.8rem;
+    }
+    p {
+      font-size: 1.2rem;
+      padding: 0 20px;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 10s linear infinite;
+      opacity: 0.7;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes float {
+      0% {
+        bottom: -50px;
+        left: calc(100% * var(--pos));
+      }
+      100% {
+        bottom: 110%;
+        left: calc(100% * var(--pos) + 50px);
+      }
+    }
+    #surpriseBtn {
+      margin-top: 30px;
+      padding: 15px 30px;
+      background: #fff;
+      color: #ee9ca7;
+      font-weight: bold;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    #surpriseBtn:hover {
+      background: #fce4ec;
+    }
+    #message {
+      margin-top: 40px;
+      font-size: 1.5rem;
+      display: none;
+      animation: fadeIn 2s ease forwards;
+    }
+    #image {
+      margin-top: 20px;
+      max-width: 90%;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      display: none;
+      animation: fadeIn 2s ease forwards;
+      max-width: 400px; /* ปรับขนาดรูป */
+      height: auto;
+    }
+    @keyframes fadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ไอ้อ้วนของเก้า 💗</h1>
+  <p>เค้ามีบางอย่างอยากบอกเธอ...</p>
+
+  <button id="surpriseBtn">กดตรงนี้ 🎁</button>
+
+  <div id="message">เค้ารักเธอมากนะ มากกว่าที่เธอคิดอีก 😜</div>
+   <!-- ข้อความที่สอง -->
+   <p id="secondMessage" style="display: none;">เธอสำคัญสำหรับฉันที่สุดค่ะ 💖</p>
+
+  <!-- เปลี่ยนลิงก์รูปตามต้องการ -->
+  <img id="image" src="https://i.imgur.com/nLEzurg.png" alt="รูปของเรา"/>
+  <div id="message">เค้าขอโทษที่เคยทำตัวไม่ดี แต่เค้ารักเธอมากๆนะ เค้ามีความสุขมากที่ได้อยู่กับเธอ</div>
+
+  <!-- 🎵 ใส่เพลงตรงนี้ -->
+  <audio id="bgMusic" src="https://voca.ro/14tV8FkVdhXz" loop></audio>
+
+  <script>
+    const btn = document.getElementById('surpriseBtn');
+    const message = document.getElementById('message');
+    const image = document.getElementById('image');
+    const music = document.getElementById('bgMusic');
+
+    btn.addEventListener('click', () => {
+      message.style.display = 'block';
+      image.style.display = 'block';
+      btn.style.display = 'none';
+
+      // เล่นเพลง
+      music.play().catch(e => {
+        console.log("ไม่สามารถเล่นเพลงได้อัตโนมัติ: ", e);
+      });
+    });
+
+    // Floating hearts
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.setProperty('--pos', Math.random());
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+</body>
+</html>
