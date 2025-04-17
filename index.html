@@ -3,148 +3,338 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>สำหรับเธอคนเดียว 💖</title>
+  <title>BETONLY STORE</title>
+  <link rel="icon" href="bet01.png" type="image/png">
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: 'Prompt', sans-serif;
-      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      background-color: #111;
       color: #fff;
-      text-align: center;
-      overflow-x: hidden;
+    }
+
+    .topbar {
+      background-color: #1c1c1c;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      height: 100vh; /* ทำให้เต็มหน้าจอ */
-    }
-    h1 {
-      margin-top: 60px;
-      font-size: 2.8rem;
-    }
-    p {
-      font-size: 1.2rem;
-      padding: 0 20px;
-    }
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      transform: rotate(45deg);
-      animation: float 10s linear infinite;
-      opacity: 0.7;
-    }
-    .heart::before,
-    .heart::after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      border-radius: 50%;
-    }
-    .heart::before {
-      top: -10px;
-      left: 0;
-    }
-    .heart::after {
-      left: -10px;
-      top: 0;
-    }
-    @keyframes float {
-      0% {
-        bottom: -50px;
-        left: calc(100% * var(--pos));
-      }
-      100% {
-        bottom: 110%;
-        left: calc(100% * var(--pos) + 50px);
-      }
-    }
-    #surpriseBtn {
-      margin-top: 30px;
       padding: 15px 30px;
-      background: #fff;
-      color: #ee9ca7;
-      font-weight: bold;
-      font-size: 1rem;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-area img {
+      width: 50px;
+      margin-right: 15px;
+      border-radius: 10px;
+    }
+
+    .logo-area h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #1effc3;
+    }
+
+    .logo-area p {
+      margin: 0;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .login-btn {
+      background-color: #1effc3;
+      color: #000;
       border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    #surpriseBtn:hover {
-      background: #fce4ec;
-    }
-    #message {
-      margin-top: 40px;
-      font-size: 1.5rem;
-      display: none;
-      animation: fadeIn 2s ease forwards;
-    }
-    #image {
-      margin-top: 20px;
-      max-width: 90%;
+      padding: 10px 20px;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      display: none;
-      animation: fadeIn 2s ease forwards;
-      max-width: 400px; /* ปรับขนาดรูป */
-      height: auto;
+      font-weight: bold;
+      cursor: pointer;
     }
-    @keyframes fadeIn {
-      0% {opacity: 0;}
-      100% {opacity: 1;}
+
+    nav {
+      background-color: #121212;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    nav a {
+      color: #1effc3;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .slider {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      margin-top: 0;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      display: block;
+    }
+
+    .content {
+      padding: 30px;
+    }
+
+    .product {
+      background-color: #1b1b1b;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .product h3 {
+      margin-top: 0;
+      color: #1effc3;
+    }
+
+    .product p {
+      color: #ddd;
+    }
+
+    footer {
+      background-color: #1c1c1c;
+      text-align: center;
+      padding: 20px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    #loginModal, #registerModal {
+      display: none;
+      position: fixed;
+      top: 25%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 1000;
+      box-shadow: 0 0 15px #1effc3;
+    }
+
+    #loginModal input, #registerModal input {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    #loginModal button, #registerModal button {
+      margin-top: 5px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      border: none;
+      background: #1effc3;
+      color: #000;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .announcement-container {
+      background-color: #222;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    .announcement-box {
+      background-color: #333;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .announcement-scroll {
+      white-space: nowrap;
+      animation: scroll-left 10s linear infinite;
+      color: #fff;
+      font-size: 18px;
+      padding: 10px;
+    }
+
+    @keyframes scroll-left {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(-100%);
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1>ไอ้อ้วนของเก้า 💗</h1>
-  <p>เค้ามีบางอย่างอยากบอกเธอ...</p>
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div class="logo-area">
+      <img src="bet01.png" alt="โลโก้">
+      <div>
+        <h1>BETONLY STORE</h1>
+        <p>Setting Free Fire ต่างๆ</p>
+      </div>
+    </div>
+    <div class="auth-buttons">
+      <button id="loginBtn" class="login-btn">เข้าสู่ระบบ</button>
+      <button id="registerBtn" class="login-btn">สมัครสมาชิก</button>
+    </div>
+  </div>
 
-  <button id="surpriseBtn">กดตรงนี้ 🎁</button>
+  <!-- Navigation -->
+  <nav>
+    <a href="#">หน้าแรก</a>
+    <a href="#">สินค้า</a>
+    <a href="#">รีวิว</a>
+    <a href="#">ติดต่อ</a>
+    <a href="#" id="adminMenu" style="display: none; color: #ffdd00;">จัดการสินค้า</a>
+  </nav>
 
-  <div id="message">เค้ารักเธอมากนะ มากกว่าที่เธอคิดอีก 😜</div>
-   <!-- ข้อความที่สอง -->
-   <p id="secondMessage" style="display: none;">เธอสำคัญสำหรับฉันที่สุดค่ะ 💖</p>
+  <!-- ประกาศ -->
+  <div class="announcement-container">
+    <div class="announcement-box">
+      <div class="announcement-scroll">
+        📢 ประกาศ: บริการขายตั้งค่า และ reg ต่างๆ ราคาถูก!
+      </div>
+    </div>
+  </div>
 
-  <!-- เปลี่ยนลิงก์รูปตามต้องการ -->
-  <img id="image" src="https://i.imgur.com/nLEzurg.png" alt="รูปของเรา"/>
-  <div id="message">เค้าขอโทษที่เคยทำตัวไม่ดี แต่เค้ารักเธอมากๆนะ เค้ามีความสุขมากที่ได้อยู่กับเธอ</div>
+  <!-- สไลด์ -->
+  <div class="slider">
+    <div class="slides">
+      <div class="slide">
+        <img src="SETTING.png" alt="สไลด์ 1">
+      </div>
+      <div class="slide">
+        <img src="SETTING.png" alt="สไลด์ 2">
+      </div>
+    </div>
+  </div>
 
-  <!-- 🎵 ใส่เพลงตรงนี้ -->
-  <audio id="bgMusic" src="https://voca.ro/14tV8FkVdhXz" loop></audio>
+  <!-- เนื้อหา -->
+  <div class="content">
+    <div class="product">
+      <h3>🔥 Regedit test</h3>
+      <p>test betonly</p>
+    </div>
+    <div class="product">
+      <h3>⚙️ Setting test</h3>
+      <p>testonlyb</p>
+    </div>
+    <div class="product">
+      <h3>🚀 OneClick Boost</h3>
+      <p>betonly test!</p>
+    </div>
+  </div>
 
+  <!-- Footer -->
+  <footer>
+    © 2025 BETONLY STORE | ติดต่อ: @betonly.ff
+  </footer>
+
+  <!-- Login Modal -->
+  <div id="loginModal">
+    <h3 style="color: #1effc3;">เข้าสู่ระบบ</h3>
+    <input type="text" id="username" placeholder="ชื่อผู้ใช้">
+    <input type="password" id="password" placeholder="รหัสผ่าน">
+    <button onclick="handleLogin()">เข้าสู่ระบบ</button>
+    <button onclick="closeModal('loginModal')" style="background-color: #888; color: white;">ยกเลิก</button>
+  </div>
+
+  <!-- Register Modal -->
+  <div id="registerModal">
+    <h3 style="color: #1effc3;">สมัครสมาชิก</h3>
+    <input type="text" id="newUsername" placeholder="ชื่อผู้ใช้ใหม่">
+    <input type="password" id="newPassword" placeholder="รหัสผ่านใหม่">
+    <button onclick="handleRegister()">สมัครสมาชิก</button>
+    <button onclick="closeModal('registerModal')" style="background-color: #888; color: white;">ยกเลิก</button>
+  </div>
+
+  <!-- Scripts -->
   <script>
-    const btn = document.getElementById('surpriseBtn');
-    const message = document.getElementById('message');
-    const image = document.getElementById('image');
-    const music = document.getElementById('bgMusic');
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      document.querySelector('.slides').style.transform = `translateX(-${currentIndex * 100}%)`;
+    }, 4000);
 
-    btn.addEventListener('click', () => {
-      message.style.display = 'block';
-      image.style.display = 'block';
-      btn.style.display = 'none';
+    const loginBtn = document.getElementById("loginBtn");
+    const registerBtn = document.getElementById("registerBtn");
 
-      // เล่นเพลง
-      music.play().catch(e => {
-        console.log("ไม่สามารถเล่นเพลงได้อัตโนมัติ: ", e);
-      });
-    });
+    loginBtn.onclick = () => {
+      document.getElementById("loginModal").style.display = "block";
+    };
 
-    // Floating hearts
-    for (let i = 0; i < 20; i++) {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.setProperty('--pos', Math.random());
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
-      document.body.appendChild(heart);
+    registerBtn.onclick = () => {
+      document.getElementById("registerModal").style.display = "block";
+    };
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    function handleLogin() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+
+      const foundUser = users.find(user => user.username === username && user.password === password);
+
+      if (foundUser) {
+        alert("✅ เข้าสู่ระบบสำเร็จ!");
+        closeModal("loginModal");
+        sessionStorage.setItem("loggedInUser", username);
+        document.getElementById("adminMenu").style.display = "inline";
+      } else {
+        alert("❌ ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+      }
+    }
+
+    function handleRegister() {
+      const newUser = document.getElementById("newUsername").value.trim();
+      const newPass = document.getElementById("newPassword").value.trim();
+
+      if (newUser && newPass) {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const userExists = users.some(user => user.username === newUser);
+
+        if (userExists) {
+          alert("⚠️ ชื่อผู้ใช้นี้มีผู้ใช้แล้ว");
+        } else {
+          users.push({ username: newUser, password: newPass });
+          localStorage.setItem('users', JSON.stringify(users));
+          alert(`✅ สมัครสมาชิกสำเร็จ! ชื่อผู้ใช้: ${newUser}`);
+          closeModal("registerModal");
+        }
+      } else {
+        alert("⚠️ กรุณากรอกข้อมูลให้ครบ");
+      }
     }
   </script>
-
 </body>
 </html>
