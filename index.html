@@ -2,385 +2,464 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BETONLY STORE</title>
-  <link rel="icon" href="bet01.png" type="image/png">
+  <title>รวมใบงานที่ 8 - 14 | นาย นพเก้า มณีฉาย คม.68/1</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
     body {
-      margin: 0;
       font-family: 'Prompt', sans-serif;
-      background-color: #111;
-      color: #fff;
+      background: #f0f4f8;
+      margin: 20px 40px;
+      color: #333;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+      letter-spacing: 1px;
+    }
+    .author {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #555;
+      font-weight: 600;
     }
 
-    .topbar {
-      background-color: #1c1c1c;
+    /* ปุ่มเมนู */
+    .tab-buttons {
+      text-align: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo-area img {
-      width: 50px;
-      margin-right: 15px;
-      border-radius: 10px;
-    }
-
-    .logo-area h1 {
-      margin: 0;
-      font-size: 24px;
-      color: #1effc3;
-    }
-
-    .logo-area p {
-      margin: 0;
-      font-size: 14px;
-      color: #ccc;
-    }
-
-    .auth-buttons {
-      display: flex;
+      justify-content: center;
       gap: 10px;
     }
-
-    .login-btn {
-      background-color: #1effc3;
-      color: #000;
+    .tab-buttons button {
+      background-color: #2a9d8f;
       border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-weight: bold;
+      color: white;
+      padding: 10px 18px;
+      font-size: 14px;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .tab-buttons button:hover {
+      background-color: #21867a;
+    }
+    .tab-buttons button.active {
+      background-color: #1b6652;
     }
 
-    nav {
-      background-color: #121212;
+    /* ซ่อนเนื้อหาที่ไม่ได้เลือก */
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* ตารางทั่วไป */
+    table {
+      width: 90%;
+      margin: 20px auto 50px auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    caption {
+      caption-side: top;
+      font-weight: 700;
+      font-size: 1.3em;
+      padding: 12px 0;
+      background: #2a9d8f;
+      color: white;
+      letter-spacing: 0.8px;
+      user-select: none;
+    }
+    th, td {
+      padding: 14px 18px;
       text-align: center;
-      padding: 10px 0;
-    }
-
-    nav a {
-      color: #1effc3;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
       font-size: 16px;
     }
 
-    .slider {
-      width: 100%;
+    /* ใบงาน 8 - Style Table Borders */
+    .style-border th, .style-border td {
+      border: 2px solid #000;
+    }
+    .round-border {
+      border: 2px solid #2a9d8f;
+      border-radius: 14px;
       overflow: hidden;
-      position: relative;
-      margin-top: 0;
     }
-
-    .slides {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-      width: 100%;
+    .round-border th, .round-border td {
+      border: 1px solid #2a9d8f;
     }
-
-    .slide {
-      min-width: 100%;
+    .dotted-border th, .dotted-border td {
+      border: 2px dotted #e76f51;
     }
-
-    .slide img {
-      width: 100%;
-      display: block;
-    }
-
-    .content {
-      padding: 30px;
-    }
-
-    .product {
-      background-color: #1b1b1b;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #000;
-    }
-
-    .product h3 {
-      margin-top: 0;
-      color: #1effc3;
-    }
-
-    .product p {
-      color: #ddd;
-    }
-
-    footer {
-      background-color: #1c1c1c;
-      text-align: center;
-      padding: 20px;
-      color: #888;
-      font-size: 14px;
-    }
-
-    /* --- MODAL LOGIN/REGISTER --- */
-    #loginModal, #registerModal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
-      background: rgba(20, 20, 20, 0.95);
-      padding: 30px 25px;
-      border-radius: 15px;
-      z-index: 1000;
-      box-shadow: 0 0 30px #1effc3;
-      transition: all 0.3s ease;
-      width: 300px;
-    }
-
-    #loginModal.show, #registerModal.show {
-      display: block;
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    #loginModal h3, #registerModal h3 {
-      margin-top: 0;
-      margin-bottom: 20px;
-      text-align: center;
-      font-size: 20px;
-      color: #1effc3;
-    }
-
-    .modal-input {
-      display: flex;
-      align-items: center;
-      background-color: #111;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      border: 1px solid #333;
-    }
-
-    .modal-input span {
-      margin-right: 10px;
-      font-size: 18px;
-      color: #1effc3;
-    }
-
-    .modal-input input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
+    .color-border th {
+      border: 2px solid #264653;
+      background-color: #264653;
       color: white;
-      font-size: 14px;
+    }
+    .color-border td {
+      border: 2px solid #2a9d8f;
     }
 
-    #loginModal button, #registerModal button {
-      margin-top: 5px;
-      padding: 10px;
-      width: 100%;
-      border-radius: 8px;
-      border: none;
-      background: linear-gradient(135deg, #1effc3, #00ffaa);
-      color: #000;
+    /* ใบงาน 9 - Table Sizes */
+    .size-table {
+      width: 700px;
+      table-layout: fixed;
+    }
+    .size-table th, .size-table td {
+      border: 1px solid #777;
+      overflow-wrap: break-word;
+    }
+    .col-small {
+      width: 120px;
+    }
+    .col-medium {
+      width: 250px;
+    }
+    .row-height {
+      height: 45px;
+    }
+
+    /* ใบงาน 10 - Table Headers */
+    .vertical-header th {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      padding: 10px 8px;
+      width: 40px;
+    }
+    .align-header th {
+      text-align: left;
+      padding-left: 20px;
+    }
+    .colspan-header th {
+      background-color: #264653;
+      color: white;
+      border: 1px solid #2a9d8f;
+    }
+
+    /* ใบงาน 11 - Cell Padding & Spacing */
+    .padding-table th, .padding-table td {
+      padding: 25px 30px;
+      border: 1px solid #aaa;
+    }
+    .spacing-table {
+      border-collapse: separate;
+      border-spacing: 12px 10px;
+      border: 1px solid #bbb;
+    }
+    .spacing-table th, .spacing-table td {
+      border: 1px solid #999;
+      padding: 10px 15px;
+      background: #fff;
+    }
+
+    /* ใบงาน 12 - Colspan & Rowspan */
+    .colspan-rowspan {
+      width: 60%;
+    }
+    .colspan-rowspan th, .colspan-rowspan td {
+      border: 1px solid #666;
+    }
+    .colspan-rowspan th {
+      background-color: #2a9d8f;
+      color: white;
+    }
+    .colspan-rowspan .highlight {
+      background-color: #a7c7e7;
+      font-weight: 600;
+    }
+
+    /* ใบงาน 13 - Table Styling */
+    .horizontal-zebra tr:nth-child(even) {
+      background-color: #eaf2f8;
+    }
+    .vertical-zebra td:nth-child(even) {
+      background-color: #fdebd0;
+    }
+    .combined-zebra tr:nth-child(even) td:nth-child(even) {
+      background-color: #d5f5e3;
+    }
+    .horizontal-divider tr {
+      border-bottom: 2px solid #95a5a6;
+    }
+    .hoverable-table tr:hover {
+      background-color: #f9e79f;
       cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s ease;
     }
 
-    #loginModal button:hover, #registerModal button:hover {
-      background: linear-gradient(135deg, #00ffaa, #1effc3);
+    /* ใบงาน 14 - Colgroup */
+    colgroup col:nth-child(1) {
+      background-color: #ffe0e0;
     }
-
-    .announcement-container {
-      background-color: #222;
-      padding: 10px;
-      margin-top: 20px;
+    colgroup col:nth-child(2) {
+      background-color: #e0ffe0;
     }
-
-    .announcement-box {
-      background-color: #333;
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
+    colgroup col:nth-child(3) {
+      background-color: #e0e0ff;
     }
-
-    .announcement-scroll {
-      white-space: nowrap;
-      animation: scroll-left 10s linear infinite;
-      color: #fff;
-      font-size: 18px;
-      padding: 10px;
+    table.colgroup-table {
+      width: 60%;
+      border: 1px solid #444;
+      margin-bottom: 60px;
     }
-
-    @keyframes scroll-left {
-      from {
-        transform: translateX(100%);
-      }
-      to {
-        transform: translateX(-100%);
-      }
+    table.colgroup-table th, table.colgroup-table td {
+      border: 1px solid #444;
+      padding: 12px 15px;
+      font-weight: 500;
+    }
+    table.colgroup-table th {
+      background-color: #264653;
+      color: white;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Bar -->
-  <div class="topbar">
-    <div class="logo-area">
-      <img src="bet01.png" alt="โลโก้">
-      <div>
-        <h1>BETONLY STORE</h1>
-        <p>Setting Free Fire ต่างๆ</p>
-      </div>
-    </div>
-    <div class="auth-buttons">
-      <button id="loginBtn" class="login-btn">เข้าสู่ระบบ</button>
-      <button id="registerBtn" class="login-btn">สมัครสมาชิก</button>
-    </div>
+  <h1>รวมใบงานที่ 8 - 14</h1>
+  <div class="author">นาย นพเก้า มณีฉาย คม.68/1</div>
+
+  <div class="tab-buttons">
+    <button class="active" data-tab="work8">ใบงานที่ 8</button>
+    <button data-tab="work9">ใบงานที่ 9</button>
+    <button data-tab="work10">ใบงานที่ 10</button>
+    <button data-tab="work11">ใบงานที่ 11</button>
+    <button data-tab="work12">ใบงานที่ 12</button>
+    <button data-tab="work13">ใบงานที่ 13</button>
+    <button data-tab="work14">ใบงานที่ 14</button>
   </div>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#">หน้าแรก</a>
-    <a href="#">สินค้า</a>
-    <a href="#">รีวิว</a>
-    <a href="#">ติดต่อ</a>
-    <a href="#" id="adminMenu" style="display: none; color: #ffdd00;">จัดการสินค้า</a>
-  </nav>
+  <!-- ใบงานที่ 8 -->
+  <section id="work8" class="tab-content active">
+    <h2>ใบงานที่ 8 - Style Table Borders</h2>
 
-  <!-- ประกาศ -->
-  <div class="announcement-container">
-    <div class="announcement-box">
-      <div class="announcement-scroll">
-        📢 ประกาศ: บริการขายตั้งค่า และ reg ต่างๆ ราคาถูก!
-      </div>
-    </div>
-  </div>
+    <table class="style-border">
+      <caption>Style Table Borders</caption>
+      <tr><th>ประเทศ</th><th>เมืองหลวง</th></tr>
+      <tr><td>ไทย</td><td>กรุงเทพฯ</td></tr>
+      <tr><td>A</td><td>เวียงจันทน์</td></tr>
+    </table>
 
-  <!-- สไลด์ -->
-  <div class="slider">
-    <div class="slides">
-      <div class="slide">
-        <img src="SETTING.png" alt="สไลด์ 1">
-      </div>
-      <div class="slide">
-        <img src="SETTING.png" alt="สไลด์ 2">
-      </div>
-    </div>
-  </div>
+    <table class="round-border">
+      <caption>Round Table Borders</caption>
+      <tr><th>ผลไม้</th><th>สี</th></tr>
+      <tr><td>แอปเปิ้ล</td><td>แดง</td></tr>
+      <tr><td>B</td><td>เหลือง</td></tr>
+    </table>
 
-  <!-- เนื้อหา -->
-  <div class="content">
-    <div class="product">
-      <h3>🔥 Regedit test</h3>
-      <p>test betonly</p>
-    </div>
-    <div class="product">
-      <h3>⚙️ Setting test</h3>
-      <p>testonlyb</p>
-    </div>
-    <div class="product">
-      <h3>🚀 OneClick Boost</h3>
-      <p>betonly test!</p>
-    </div>
-  </div>
+    <table class="dotted-border">
+      <caption>Dotted Table Borders</caption>
+      <tr><th>วิชา</th><th>คะแนน</th></tr>
+      <tr><td>คณิตศาสตร์</td><td>90</td></tr>
+      <tr><td>วิทยาศาสตร์</td><td>85</td></tr>
+    </table>
 
-  <!-- Footer -->
-  <footer>
-    © 2025 BETONLY STORE | ติดต่อ: @betonly.ff
-  </footer>
+    <table class="color-border">
+      <caption>Border Color</caption>
+      <tr><th>ชื่อ</th><th>อายุ</th></tr>
+      <tr><td>นพเก้า</td><td>17</td></tr>
+      <tr><td>C</td><td>18</td></tr>
+    </table>
+  </section>
 
-  <!-- Login Modal -->
-  <div id="loginModal">
-    <h3>🔐 เข้าสู่ระบบ</h3>
-    <div class="modal-input">
-      <span>👤</span><input type="text" id="username" placeholder="ชื่อผู้ใช้">
-    </div>
-    <div class="modal-input">
-      <span>🔒</span><input type="password" id="password" placeholder="รหัสผ่าน">
-    </div>
-    <button onclick="handleLogin()">เข้าสู่ระบบ</button>
-    <button onclick="closeModal('loginModal')" style="background-color: #444; color: white;">ยกเลิก</button>
-  </div>
+  <!-- ใบงานที่ 9 -->
+  <section id="work9" class="tab-content">
+    <h2>ใบงานที่ 9 - Table Sizes</h2>
+    <table class="size-table">
+      <caption>กำหนดขนาดตาราง และความกว้างคอลัมน์</caption>
+      <tr>
+        <th class="col-small">รหัสสินค้า</th>
+        <th class="col-medium">ชื่อสินค้า</th>
+        <th>ราคา (บาท)</th>
+      </tr>
+      <tr class="row-height">
+        <td>001</td>
+        <td>โน้ตบุ๊ก</td>
+        <td>25,000</td>
+      </tr>
+      <tr class="row-height">
+        <td>002</td>
+        <td>แท็บเล็ต</td>
+        <td>12,000</td>
+      </tr>
+    </table>
+  </section>
 
-  <!-- Register Modal -->
-  <div id="registerModal">
-    <h3>📝 สมัครสมาชิก</h3>
-    <div class="modal-input">
-      <span>👤</span><input type="text" id="newUsername" placeholder="ชื่อผู้ใช้ใหม่">
-    </div>
-    <div class="modal-input">
-      <span>🔒</span><input type="password" id="newPassword" placeholder="รหัสผ่านใหม่">
-    </div>
-    <button onclick="handleRegister()">สมัครสมาชิก</button>
-    <button onclick="closeModal('registerModal')" style="background-color: #444; color: white;">ยกเลิก</button>
-  </div>
+  <!-- ใบงานที่ 10 -->
+  <section id="work10" class="tab-content">
+    <h2>ใบงานที่ 10 - Table Headers</h2>
+    <table class="colspan-header" style="width: 80%; margin: auto;">
+      <caption>หัวตารางแบบรวมคอลัมน์ (Colspan)</caption>
+      <tr><th colspan="3">ข้อมูลนักเรียน</th></tr>
+      <tr>
+        <th>ชื่อ</th><th>ชั้น</th><th>คะแนน</th>
+      </tr>
+      <tr><td>นพเก้า</td><td>คม.68/1</td><td>95</td></tr>
+      <tr><td>A</td><td>คม.68/1</td><td>88</td></tr>
+    </table>
 
-  <!-- Scripts -->
-  <script>
-    let currentIndex = 0;
-    const slides = document.querySelectorAll('.slide');
-    setInterval(() => {
-      currentIndex = (currentIndex + 1) % slides.length;
-      document.querySelector('.slides').style.transform = `translateX(-${currentIndex * 100}%)`;
-    }, 4000);
+    <table class="vertical-header" style="width: 60%; margin: 30px auto;">
+      <caption>หัวตารางแนวตั้ง (Vertical Headers)</caption>
+      <tr>
+        <th>วิชา</th>
+        <th>คะแนน</th>
+      </tr>
+      <tr>
+        <td>คณิตศาสตร์</td>
+        <td>90</td>
+      </tr>
+      <tr>
+        <td>วิทยาศาสตร์</td>
+        <td>85</td>
+      </tr>
+    </table>
+  </section>
 
-    const loginBtn = document.getElementById("loginBtn");
-    const registerBtn = document.getElementById("registerBtn");
+  <!-- ใบงานที่ 11 -->
+  <section id="work11" class="tab-content">
+    <h2>ใบงานที่ 11 - Table Cell Padding & Spacing</h2>
+    <table class="padding-table">
+      <caption>ตาราง Cell Padding (ช่องว่างในเซลล์)</caption>
+      <tr><th>สินค้า</th><th>ราคา</th></tr>
+      <tr><td>มือถือ</td><td>8,500</td></tr>
+      <tr><td>หูฟัง</td><td>1,200</td></tr>
+    </table>
 
-    loginBtn.onclick = () => {
-      document.getElementById("loginModal").classList.add("show");
-    };
+    <table class="spacing-table">
+      <caption>ตาราง Cell Spacing (ช่องว่างระหว่างเซลล์)</caption>
+      <tr><th>สินค้า</th><th>ราคา</th></tr>
+      <tr><td>โน้ตบุ๊ก</td><td>24,500</td></tr>
+      <tr><td>แท็บเล็ต</td><td>11,500</td></tr>
+    </table>
+  </section>
 
-    registerBtn.onclick = () => {
-      document.getElementById("registerModal").classList.add("show");
-    };
+  <!-- ใบงานที่ 12 -->
+  <section id="work12" class="tab-content">
+    <h2>ใบงานที่ 12 - Table Colspan & Rowspan</h2>
+    <table class="colspan-rowspan">
+      <caption>Colspan และ Rowspan</caption>
+      <tr>
+        <th>ชื่อ</th>
+        <th colspan="2">รายละเอียด</th>
+      </tr>
+      <tr>
+        <td>นพเก้า</td>
+        <td class="highlight">อายุ</td>
+        <td>17</td>
+      </tr>
+      <tr>
+        <td>ภูผา</td>
+        <td class="highlight">ชั้น</td>
+        <td>คม.68/1</td>
+      </tr>
+    </table>
+  </section>
 
-    function closeModal(id) {
-      document.getElementById(id).classList.remove("show");
-    }
+  <!-- ใบงานที่ 13 -->
+  <section id="work13" class="tab-content">
+    <h2>ใบงานที่ 13 - Table Styling (Zebra Stripes, Divider, Hover)</h2>
+    <table class="horizontal-zebra">
+      <caption>Horizontal Zebra Stripes</caption>
+      <tr><th>ชื่อ</th><th>คะแนน</th></tr>
+      <tr><td>นพเก้า</td><td>90</td></tr>
+      <tr><td>A</td><td>88</td></tr>
+      <tr><td>B</td><td>76</td></tr>
+    </table>
 
-    function handleLogin() {
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const users = JSON.parse(localStorage.getItem('users')) || [];
+    <table class="vertical-zebra">
+      <caption>Vertical Zebra Stripes</caption>
+      <tr><th>ชื่อ</th><th>คะแนน</th></tr>
+      <tr><td>นพเก้า</td><td>90</td></tr>
+      <tr><td>A</td><td>88</td></tr>
+      <tr><td>B</td><td>76</td></tr>
+    </table>
 
-      const foundUser = users.find(user => user.username === username && user.password === password);
+    <table class="combined-zebra">
+      <caption>Combine Vertical & Horizontal Stripes</caption>
+      <tr><th>ชื่อ</th><th>คะแนน</th><th>เกรด</th></tr>
+      <tr><td>นพเก้า</td><td>90</td><td>A</td></tr>
+      <tr><td>A</td><td>88</td><td>A</td></tr>
+      <tr><td>B</td><td>76</td><td>B+</td></tr>
+    </table>
 
-      if (foundUser) {
-        alert("✅ เข้าสู่ระบบสำเร็จ!");
-        closeModal("loginModal");
-        sessionStorage.setItem("loggedInUser", username);
-        document.getElementById("adminMenu").style.display = "inline";
-      } else {
-        alert("❌ ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
-      }
-    }
+    <table class="horizontal-divider">
+      <caption>Horizontal Divider</caption>
+      <tr><th>สินค้า</th><th>ราคา</th></tr>
+      <tr><td>โน้ตบุ๊ก</td><td>25,000</td></tr>
+      <tr><td>แท็บเล็ต</td><td>12,000</td></tr>
+      <tr><td>หูฟัง</td><td>1,500</td></tr>
+    </table>
 
-    function handleRegister() {
-      const newUser = document.getElementById("newUsername").value.trim();
-      const newPass = document.getElementById("newPassword").value.trim();
+    <table class="hoverable-table">
+      <caption>Hoverable Table</caption>
+      <tr><th>วิชา</th><th>หน่วยกิต</th></tr>
+      <tr><td>ภาษาอังกฤษ</td><td>3</td></tr>
+      <tr><td>คอมพิวเตอร์</td><td>3</td></tr>
+      <tr><td>คณิตศาสตร์</td><td>4</td></tr>
+    </table>
+  </section>
 
-      if (newUser && newPass) {
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-        const userExists = users.some(user => user.username === newUser);
+  <!-- ใบงานที่ 14 -->
+  <section id="work14" class="tab-content">
+    <h2>ใบงานที่ 14 - Table Colgroup และ Multiple Col Elements</h2>
+    <table class="colgroup-table">
+      <caption>ใช้ &lt;colgroup&gt; กำหนดสีพื้นหลังคอลัมน์</caption>
+      <colgroup>
+        <col span="1" />
+        <col span="1" />
+        <col span="1" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>ชื่อ</th>
+          <th>ชั้นปี</th>
+          <th>คะแนนรวม</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>นพเก้า มณีฉาย</td>
+          <td>คม.68/1</td>
+          <td>95</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>คม.68/1</td>
+          <td>88</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>คม.68/2</td>
+          <td>91</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
 
-        if (userExists) {
-          alert("⚠️ ชื่อผู้ใช้นี้มีผู้ใช้แล้ว");
-        } else {
-          users.push({ username: newUser, password: newPass });
-          localStorage.setItem('users', JSON.stringify(users));
-          alert(`✅ สมัครสมาชิกสำเร็จ! ชื่อผู้ใช้: ${newUser}`);
-          closeModal("registerModal");
-        }
-      } else {
-        alert("⚠️ กรุณากรอกข้อมูลให้ครบ");
-      }
-    }
-  </script>
+<script>
+  // เลือก tab และแสดงเนื้อหา
+  const buttons = document.querySelectorAll('.tab-buttons button');
+  const tabs = document.querySelectorAll('.tab-content');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      tabs.forEach(tab => tab.classList.remove('active'));
+      btn.classList.add('active');
+      const tabId = btn.getAttribute('data-tab');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+</script>
+
 </body>
 </html>
